@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>ELW 2026 | Employee Learning Week</title>
 
     <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
         * {
             margin: 0;
             padding: 0;
@@ -17,55 +27,122 @@
         body {
             width: 100%;
             height: 100%;
-            background: #04060b;
             overflow: hidden;
         }
 
         body {
-            font-family: Inter, Arial, Helvetica, sans-serif;
-            color: #fff;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #04060b;
+            color: #ffffff;
         }
 
-        /* ==============================
+
+        /* =========================================================
            BACKGROUND
-        ============================== */
+        ========================================================= */
 
         .background {
             position: fixed;
             inset: 0;
+
             z-index: 0;
 
+            overflow: hidden;
+
             background:
+
                 radial-gradient(
                     circle at 18% 18%,
-                    rgba(87, 64, 255, .20),
+                    rgba(87, 64, 255, 0.20),
                     transparent 34%
                 ),
+
                 radial-gradient(
                     circle at 82% 80%,
-                    rgba(0, 184, 255, .13),
+                    rgba(0, 184, 255, 0.13),
                     transparent 35%
                 ),
+
                 linear-gradient(
                     135deg,
-                    #05070d,
+                    #05070d 0%,
                     #090d18 55%,
-                    #04050a
+                    #04050a 100%
                 );
         }
 
+
+        /* =========================================================
+           BACKGROUND GRID
+        ========================================================= */
+
+        .background::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,0.018) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.018) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,0.6),
+                    transparent
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================================
+           GLOW ORBS
+        ========================================================= */
+
         .orb {
             position: absolute;
+
             border-radius: 50%;
+
             filter: blur(100px);
-            opacity: .32;
-            animation: float 10s ease-in-out infinite alternate;
+
+            opacity: 0.32;
+
+            animation:
+                floatingOrb
+                10s
+                ease-in-out
+                infinite
+                alternate;
         }
 
         .orb-one {
             width: 500px;
             height: 500px;
+
             background: #6047ff;
+
             top: -230px;
             left: -150px;
         }
@@ -73,238 +150,375 @@
         .orb-two {
             width: 450px;
             height: 450px;
+
             background: #008cff;
+
             right: -160px;
             bottom: -200px;
+
             animation-delay: -4s;
         }
 
-        @keyframes float {
+        @keyframes floatingOrb {
+
             from {
-                transform: translate(0, 0);
+                transform:
+                    translate3d(0, 0, 0);
             }
 
             to {
-                transform: translate(60px, 35px);
+                transform:
+                    translate3d(60px, 35px, 0);
             }
         }
 
-        /* ==============================
-           LOGIN
-        ============================== */
+
+        /* =========================================================
+           LOGIN SCREEN
+        ========================================================= */
 
         #loginScreen {
             position: fixed;
             inset: 0;
+
             z-index: 10;
 
             display: flex;
+
             justify-content: center;
             align-items: center;
 
             padding: 25px;
 
             transition:
-                opacity .8s ease,
-                transform .8s ease,
-                filter .8s ease;
+                opacity 0.8s ease,
+                transform 0.8s ease,
+                filter 0.8s ease;
         }
 
         #loginScreen.hide {
             opacity: 0;
-            transform: scale(1.05);
-            filter: blur(12px);
+
+            transform:
+                scale(1.05);
+
+            filter:
+                blur(12px);
+
             pointer-events: none;
         }
+
+
+        /* =========================================================
+           CONTAINER
+        ========================================================= */
 
         .container {
             width: 100%;
             max-width: 470px;
+
             text-align: center;
         }
 
-        /* ==============================
-           ELW BRAND
-        ============================== */
+
+        /* =========================================================
+           EVENT LABEL
+        ========================================================= */
 
         .event-label {
             display: inline-flex;
-            align-items: center;
-            gap: 8px;
 
-            padding: 8px 15px;
+            align-items: center;
+
+            gap: 9px;
+
+            padding:
+                8px
+                15px;
+
             margin-bottom: 20px;
 
             border-radius: 100px;
 
-            border: 1px solid rgba(255,255,255,.12);
-            background: rgba(255,255,255,.05);
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
 
-            backdrop-filter: blur(15px);
+            background:
+                rgba(255,255,255,0.05);
+
+            backdrop-filter:
+                blur(15px);
+
+            -webkit-backdrop-filter:
+                blur(15px);
 
             font-size: 10px;
+
             font-weight: 700;
+
             letter-spacing: 2px;
 
-            color: rgba(255,255,255,.68);
+            color:
+                rgba(255,255,255,0.68);
         }
+
+
+        /* =========================================================
+           LIVE DOT
+        ========================================================= */
 
         .dot {
             width: 7px;
             height: 7px;
 
             border-radius: 50%;
+
             background: #62ffaf;
 
             box-shadow:
+
                 0 0 8px #62ffaf,
-                0 0 18px rgba(98,255,175,.5);
+
+                0 0 18px
+                rgba(98,255,175,0.5);
         }
+
+
+        /* =========================================================
+           ELW BRAND
+        ========================================================= */
 
         .brand h1 {
             font-size: 66px;
-            line-height: .95;
+
+            line-height: 0.95;
 
             letter-spacing: -4px;
 
             font-weight: 800;
 
             background:
+
                 linear-gradient(
                     135deg,
-                    #fff,
+                    #ffffff,
                     #c1cbff 55%,
                     #7788ff
                 );
 
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+
+            background-clip:
+                text;
         }
 
         .brand h1 span {
             display: block;
         }
 
+
         .brand-description {
             margin-top: 17px;
+
             margin-bottom: 32px;
 
             font-size: 13px;
+
             line-height: 1.6;
 
-            color: rgba(255,255,255,.42);
+            letter-spacing: 0.5px;
+
+            color:
+                rgba(255,255,255,0.42);
         }
 
-        /* ==============================
+
+        /* =========================================================
            ACCESS CARD
-        ============================== */
+        ========================================================= */
 
         .access-card {
             position: relative;
 
             padding: 31px;
 
+            overflow: hidden;
+
             border-radius: 24px;
 
-            border: 1px solid rgba(255,255,255,.10);
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
 
-            background: rgba(255,255,255,.055);
+            background:
+                rgba(255,255,255,0.055);
 
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
+            backdrop-filter:
+                blur(28px);
+
+            -webkit-backdrop-filter:
+                blur(28px);
 
             box-shadow:
-                0 30px 80px rgba(0,0,0,.50),
-                inset 0 1px 0 rgba(255,255,255,.06);
+
+                0 30px 80px
+                rgba(0,0,0,0.50),
+
+                inset 0 1px 0
+                rgba(255,255,255,0.06);
         }
 
-        /* ==============================
-           USER
-        ============================== */
+
+        /* top subtle highlight */
+
+        .access-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 15%;
+            right: 15%;
+
+            height: 1px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.5),
+                    transparent
+                );
+
+            opacity: 0.35;
+        }
+
+
+        /* =========================================================
+           USER ICON
+        ========================================================= */
 
         .user-icon {
-            width: 54px;
-            height: 54px;
+            width: 56px;
+            height: 56px;
 
-            margin: 0 auto 15px;
+            margin:
+                0 auto 16px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
-            border-radius: 16px;
+            border-radius: 17px;
 
             background:
+
                 linear-gradient(
                     135deg,
-                    rgba(103,92,255,.95),
-                    rgba(62,126,255,.95)
+                    #675cff,
+                    #3e7eff
                 );
 
             box-shadow:
-                0 12px 30px rgba(74,83,255,.28);
+
+                0 12px 30px
+                rgba(74,83,255,0.28);
 
             font-size: 19px;
+
             font-weight: 700;
+
+            letter-spacing: 1px;
         }
 
-        .welcome {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
 
-            color: rgba(255,255,255,.35);
+        /* =========================================================
+           USER DETAILS
+        ========================================================= */
+
+        .welcome-label {
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2.5px;
+
+            color:
+                rgba(255,255,255,0.32);
 
             margin-bottom: 8px;
         }
 
+
         .name {
             font-size: 19px;
+
             line-height: 1.35;
 
             font-weight: 700;
 
-            color: #fff;
+            color: #ffffff;
         }
 
+
         .position {
-            max-width: 350px;
+            max-width: 360px;
 
             margin:
                 7px auto 0;
 
             font-size: 12px;
+
             line-height: 1.55;
 
-            color: rgba(255,255,255,.45);
+            color:
+                rgba(255,255,255,0.45);
         }
+
 
         .department {
-            margin-top: 6px;
+            margin-top: 7px;
 
             font-size: 11px;
+
             font-weight: 600;
 
-            color: rgba(151,165,255,.85);
+            color:
+                rgba(151,165,255,0.90);
         }
+
+
+        /* =========================================================
+           DIVIDER
+        ========================================================= */
 
         .divider {
             height: 1px;
 
-            margin: 24px 0;
+            margin:
+                24px 0;
 
             background:
+
                 linear-gradient(
                     90deg,
                     transparent,
-                    rgba(255,255,255,.10),
+                    rgba(255,255,255,0.11),
                     transparent
                 );
         }
 
-        /* ==============================
+
+        /* =========================================================
            PASSWORD
-        ============================== */
+        ========================================================= */
 
         .field {
             text-align: left;
@@ -316,53 +530,80 @@
             margin-bottom: 8px;
 
             font-size: 10px;
+
             font-weight: 700;
 
             letter-spacing: 1.2px;
 
-            color: rgba(255,255,255,.40);
+            color:
+                rgba(255,255,255,0.40);
 
             text-transform: uppercase;
         }
+
 
         .password-wrapper {
             position: relative;
         }
 
+
         .password-wrapper input {
             width: 100%;
             height: 53px;
 
-            padding: 0 48px 0 16px;
+            padding:
+                0 50px
+                0 16px;
 
             border-radius: 12px;
 
             border:
-                1px solid rgba(255,255,255,.10);
+                1px solid
+                rgba(255,255,255,0.10);
 
             background:
-                rgba(0,0,0,.24);
+                rgba(0,0,0,0.24);
 
-            color: white;
+            color: #ffffff;
 
             font-size: 15px;
 
             outline: none;
 
-            transition: .25s;
+            transition:
+                border-color 0.25s,
+                box-shadow 0.25s,
+                background 0.25s;
         }
 
-        .password-wrapper input:focus {
-            border-color:
-                rgba(112,128,255,.8);
-
-            box-shadow:
-                0 0 0 3px rgba(95,110,255,.10);
-        }
 
         .password-wrapper input::placeholder {
-            color: rgba(255,255,255,.23);
+            color:
+                rgba(255,255,255,0.23);
         }
+
+
+        .password-wrapper input:focus {
+
+            border-color:
+                rgba(112,128,255,0.8);
+
+            background:
+                rgba(0,0,0,0.32);
+
+            box-shadow:
+
+                0 0 0 3px
+                rgba(95,110,255,0.10),
+
+                0 0 30px
+                rgba(80,90,255,0.08);
+        }
+
+
+        /* =========================================================
+           PASSWORD EYE
+        ========================================================= */
 
         .eye {
             position: absolute;
@@ -370,39 +611,66 @@
             right: 15px;
             top: 50%;
 
-            transform: translateY(-50%);
+            transform:
+                translateY(-50%);
+
+            width: 25px;
+            height: 25px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
 
             border: 0;
+
             background: none;
 
-            color: rgba(255,255,255,.40);
+            color:
+                rgba(255,255,255,0.42);
 
             cursor: pointer;
 
             font-size: 17px;
+
+            transition: color 0.2s;
         }
 
-        /* ==============================
-           BUTTON
-        ============================== */
+        .eye:hover {
+            color: #ffffff;
+        }
+
+
+        /* =========================================================
+           ENTER BUTTON
+        ========================================================= */
 
         .enter-btn {
+            position: relative;
+
             width: 100%;
             height: 54px;
 
             margin-top: 17px;
 
+            overflow: hidden;
+
             border: none;
+
             border-radius: 13px;
 
-            color: white;
+            color: #ffffff;
 
             font-size: 13px;
+
             font-weight: 700;
+
+            letter-spacing: 0.2px;
 
             cursor: pointer;
 
             background:
+
                 linear-gradient(
                     135deg,
                     #615cff,
@@ -411,33 +679,161 @@
                 );
 
             box-shadow:
-                0 13px 32px rgba(80,88,255,.30);
 
-            transition: .25s;
+                0 13px 32px
+                rgba(80,88,255,0.30);
+
+            transition:
+                transform 0.25s,
+                box-shadow 0.25s;
         }
+
+
+        .enter-btn::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: -100%;
+
+            width: 70%;
+            height: 100%;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.20),
+                    transparent
+                );
+
+            transform:
+                skewX(-20deg);
+
+            transition:
+                left 0.6s;
+        }
+
+
+        .enter-btn:hover::before {
+            left: 140%;
+        }
+
 
         .enter-btn:hover {
-            transform: translateY(-2px);
+            transform:
+                translateY(-2px);
 
             box-shadow:
-                0 17px 40px rgba(80,88,255,.40);
+
+                0 17px 40px
+                rgba(80,88,255,0.40);
         }
 
+
         .enter-btn:active {
-            transform: scale(.985);
+            transform:
+                scale(0.985);
         }
+
+
+        /* =========================================================
+           SECURE LABEL
+        ========================================================= */
 
         .secure {
             margin-top: 16px;
 
             font-size: 10px;
 
-            color: rgba(255,255,255,.25);
+            letter-spacing: 0.4px;
+
+            color:
+                rgba(255,255,255,0.24);
         }
 
-        /* ==============================
-           VIDEO
-        ============================== */
+
+        /* =========================================================
+           LOADING SCREEN
+        ========================================================= */
+
+        #loader {
+            position: fixed;
+            inset: 0;
+
+            z-index: 50;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 17px;
+
+            background: #04060b;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                opacity 0.3s ease;
+        }
+
+
+        #loader.show {
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+
+        .spinner {
+            width: 36px;
+            height: 36px;
+
+            border-radius: 50%;
+
+            border:
+                2px solid
+                rgba(255,255,255,0.10);
+
+            border-top-color:
+                #ffffff;
+
+            animation:
+                spin 0.7s linear infinite;
+        }
+
+
+        .loading-text {
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            color:
+                rgba(255,255,255,0.35);
+
+            text-transform: uppercase;
+        }
+
+
+        @keyframes spin {
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
+
+
+        /* =========================================================
+           VIDEO SCREEN
+        ========================================================= */
 
         #videoScreen {
             position: fixed;
@@ -445,18 +841,23 @@
 
             z-index: 100;
 
-            background: #000;
+            background: #000000;
 
             opacity: 0;
+
             visibility: hidden;
 
-            transition: opacity .65s ease;
+            transition:
+                opacity 0.8s ease;
         }
+
 
         #videoScreen.show {
             opacity: 1;
+
             visibility: visible;
         }
+
 
         #elwVideo {
             position: absolute;
@@ -467,102 +868,399 @@
 
             object-fit: cover;
 
-            background: #000;
+            background: #000000;
         }
 
-        /* ==============================
-           LOADING
-        ============================== */
 
-        #loader {
+        /* =========================================================
+           FINAL WELCOME SCREEN
+        ========================================================= */
+
+        #welcomeScreen {
             position: fixed;
             inset: 0;
 
-            z-index: 50;
+            z-index: 90;
 
             display: flex;
+
             justify-content: center;
             align-items: center;
 
-            background: #04060b;
+            overflow: hidden;
+
+            text-align: center;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 40%,
+                    rgba(91,75,255,0.22),
+                    transparent 38%
+                ),
+
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(0,170,255,0.11),
+                    transparent 35%
+                ),
+
+                radial-gradient(
+                    circle at 15% 85%,
+                    rgba(89,61,255,0.08),
+                    transparent 30%
+                ),
+
+                #04060b;
 
             opacity: 0;
+
             visibility: hidden;
 
-            transition: opacity .3s;
+            transition:
+                opacity 1.2s ease;
         }
 
-        #loader.show {
+
+        #welcomeScreen::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,0.018) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.018) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                70px 70px;
+
+            mask-image:
+
+                radial-gradient(
+                    circle at center,
+                    black,
+                    transparent 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        #welcomeScreen.show {
             opacity: 1;
+
             visibility: visible;
         }
 
-        .spinner {
-            width: 34px;
-            height: 34px;
+
+        /* =========================================================
+           WELCOME GLOW
+        ========================================================= */
+
+        .welcome-glow {
+            position: absolute;
+
+            width: 700px;
+            height: 700px;
 
             border-radius: 50%;
 
-            border:
-                2px solid rgba(255,255,255,.10);
+            background:
+                rgba(83,68,255,0.08);
 
-            border-top-color: white;
+            filter:
+                blur(100px);
 
-            animation: spin .7s linear infinite;
+            animation:
+                welcomePulse
+                5s
+                ease-in-out
+                infinite
+                alternate;
         }
 
-        @keyframes spin {
+
+        @keyframes welcomePulse {
+
+            from {
+                transform:
+                    scale(0.85);
+
+                opacity: 0.5;
+            }
+
             to {
-                transform: rotate(360deg);
+                transform:
+                    scale(1.15);
+
+                opacity: 1;
             }
         }
 
-        /* ==============================
+
+        /* =========================================================
+           WELCOME CONTENT
+        ========================================================= */
+
+        .welcome-content {
+            position: relative;
+
+            z-index: 2;
+
+            padding: 30px;
+
+            transform:
+                translateY(35px);
+
+            opacity: 0;
+
+            transition:
+
+                transform
+                1.3s
+                cubic-bezier(.2,.8,.2,1),
+
+                opacity
+                1.3s
+                ease;
+        }
+
+
+        #welcomeScreen.show
+        .welcome-content {
+
+            transform:
+                translateY(0);
+
+            opacity: 1;
+        }
+
+
+        /* =========================================================
+           WELCOME SMALL TEXT
+        ========================================================= */
+
+        .welcome-small {
+            margin-bottom: 24px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 6px;
+
+            color:
+                rgba(255,255,255,0.40);
+        }
+
+
+        /* =========================================================
+           WELCOME TITLE
+        ========================================================= */
+
+        .welcome-content h2 {
+            font-size:
+                clamp(
+                    48px,
+                    7vw,
+                    94px
+                );
+
+            line-height: 0.98;
+
+            letter-spacing: -5px;
+
+            font-weight: 300;
+
+            color:
+                rgba(255,255,255,0.88);
+        }
+
+
+        .welcome-content h2 span {
+            display: block;
+
+            margin-top: 12px;
+
+            font-weight: 800;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #ffffff 10%,
+                    #c4ceff 48%,
+                    #7182ff 100%
+                );
+
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+
+            background-clip:
+                text;
+        }
+
+
+        /* =========================================================
+           WELCOME TAGLINE
+        ========================================================= */
+
+        .welcome-tagline {
+            margin-top: 27px;
+
+            font-size: 15px;
+
+            letter-spacing: 1.5px;
+
+            color:
+                rgba(255,255,255,0.45);
+        }
+
+
+        /* =========================================================
+           WELCOME LINE
+        ========================================================= */
+
+        .welcome-line {
+            width: 0;
+
+            height: 1px;
+
+            margin:
+                38px auto 26px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(145,155,255,0.95),
+                    transparent
+                );
+
+            transition:
+                width
+                1.5s
+                ease
+                0.5s;
+        }
+
+
+        #welcomeScreen.show
+        .welcome-line {
+
+            width: 220px;
+        }
+
+
+        /* =========================================================
+           WELCOME FOOTER
+        ========================================================= */
+
+        .welcome-footer {
+            font-size: 10px;
+
+            font-weight: 600;
+
+            letter-spacing: 4px;
+
+            color:
+                rgba(255,255,255,0.27);
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================================
            MOBILE
-        ============================== */
+        ========================================================= */
 
         @media(max-width: 600px) {
 
+            #loginScreen {
+                padding: 18px;
+            }
+
             .brand h1 {
                 font-size: 54px;
+
                 letter-spacing: -3px;
             }
 
+            .brand-description {
+                margin-bottom: 23px;
+            }
+
             .access-card {
-                padding: 25px 20px;
+                padding:
+                    25px 20px;
             }
 
             .name {
                 font-size: 17px;
             }
 
+            .position {
+                font-size: 11px;
+            }
+
             #elwVideo {
                 object-fit: contain;
             }
+
+            .welcome-content h2 {
+                letter-spacing: -3px;
+            }
+
+            .welcome-small {
+                letter-spacing: 4px;
+            }
         }
+
     </style>
 </head>
 
 
 <body>
 
-    <!-- BACKGROUND -->
+
+    <!-- =========================================================
+         BACKGROUND
+    ========================================================== -->
 
     <div class="background">
 
         <div class="orb orb-one"></div>
+
         <div class="orb orb-two"></div>
 
     </div>
 
 
-    <!-- ==============================
+
+    <!-- =========================================================
          LOGIN SCREEN
-    ============================== -->
+    ========================================================== -->
 
     <section id="loginScreen">
 
         <div class="container">
+
+
+            <!-- BRAND -->
 
             <div class="brand">
 
@@ -574,52 +1272,87 @@
 
                 </div>
 
+
                 <h1>
+
                     ELW
-                    <span>2026</span>
+
+                    <span>
+                        2026
+                    </span>
+
                 </h1>
 
+
                 <div class="brand-description">
-                    Discover. Learn. Build what's next.
+
+                    Discover. Learn. Build What's Next.
+
                 </div>
 
             </div>
 
 
+
+            <!-- LOGIN CARD -->
+
             <div class="access-card">
 
+
                 <div class="user-icon">
+
                     SA
+
                 </div>
 
-                <div class="welcome">
+
+                <div class="welcome-label">
+
                     Welcome
+
                 </div>
+
 
                 <div class="name">
+
                     Shuhaibahtulaslamiah
+
                 </div>
+
 
                 <div class="position">
+
                     Acting Group Chief Human Resource Officer,
                     Group BPMB
+
                 </div>
 
+
                 <div class="department">
+
                     Group Human Resource
+
                 </div>
+
 
 
                 <div class="divider"></div>
 
 
+
+                <!-- PASSWORD FORM -->
+
                 <form id="loginForm">
+
 
                     <div class="field">
 
-                        <label>
+                        <label for="password">
+
                             Password
+
                         </label>
+
 
                         <div class="password-wrapper">
 
@@ -629,14 +1362,19 @@
                                 placeholder="Enter your password"
                                 required
                                 autofocus
+                                autocomplete="current-password"
                             >
+
 
                             <button
                                 type="button"
                                 class="eye"
-                                onclick="togglePassword()"
+                                id="eyeButton"
+                                aria-label="Show password"
                             >
+
                                 ◉
+
                             </button>
 
                         </div>
@@ -644,19 +1382,27 @@
                     </div>
 
 
+
                     <button
                         type="submit"
                         class="enter-btn"
+                        id="enterButton"
                     >
+
                         Enter ELW 2026 →
+
                     </button>
 
                 </form>
 
 
+
                 <div class="secure">
+
                     Secure Access • Employee Learning Week 2026
+
                 </div>
+
 
             </div>
 
@@ -665,78 +1411,204 @@
     </section>
 
 
-    <!-- ==============================
-         LOADING TRANSITION
-    ============================== -->
 
-    <div id="loader">
+    <!-- =========================================================
+         LOADING
+    ========================================================== -->
+
+    <section id="loader">
+
         <div class="spinner"></div>
-    </div>
+
+        <div class="loading-text">
+
+            Preparing Experience
+
+        </div>
+
+    </section>
 
 
-    <!-- ==============================
+
+    <!-- =========================================================
+         FINAL WELCOME SCREEN
+         This sits BEHIND the video.
+    ========================================================== -->
+
+    <section id="welcomeScreen">
+
+        <div class="welcome-glow"></div>
+
+
+        <div class="welcome-content">
+
+
+            <div class="welcome-small">
+
+                EMPLOYEE LEARNING WEEK
+
+            </div>
+
+
+            <h2>
+
+                Welcome to
+
+                <span>
+
+                    ELW 2026
+
+                </span>
+
+            </h2>
+
+
+            <div class="welcome-tagline">
+
+                Discover. Learn. Build What's Next.
+
+            </div>
+
+
+            <div class="welcome-line"></div>
+
+
+            <div class="welcome-footer">
+
+                GROUP BPMB
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
          VIDEO
-    ============================== -->
+    ========================================================== -->
 
     <section id="videoScreen">
 
         <video
             id="elwVideo"
-            playsinline
             preload="auto"
+            playsinline
         >
+
             <source
                 src="elw.mp4"
                 type="video/mp4"
             >
+
+            Your browser does not support HTML5 video.
+
         </video>
 
     </section>
 
 
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
     <script>
 
+        /* =========================================================
+           ELEMENTS
+        ========================================================= */
+
         const loginForm =
-            document.getElementById("loginForm");
+            document.getElementById(
+                "loginForm"
+            );
+
 
         const loginScreen =
-            document.getElementById("loginScreen");
+            document.getElementById(
+                "loginScreen"
+            );
+
 
         const loader =
-            document.getElementById("loader");
+            document.getElementById(
+                "loader"
+            );
+
 
         const videoScreen =
-            document.getElementById("videoScreen");
+            document.getElementById(
+                "videoScreen"
+            );
+
 
         const video =
-            document.getElementById("elwVideo");
+            document.getElementById(
+                "elwVideo"
+            );
 
 
-        /* ==============================
-           PASSWORD SHOW / HIDE
-        ============================== */
+        const welcomeScreen =
+            document.getElementById(
+                "welcomeScreen"
+            );
 
-        function togglePassword() {
 
-            const password =
-                document.getElementById("password");
+        const password =
+            document.getElementById(
+                "password"
+            );
 
-            if (password.type === "password") {
 
-                password.type = "text";
+        const eyeButton =
+            document.getElementById(
+                "eyeButton"
+            );
 
-            } else {
 
-                password.type = "password";
+
+        /* =========================================================
+           SHOW / HIDE PASSWORD
+        ========================================================= */
+
+        eyeButton.addEventListener(
+            "click",
+            function() {
+
+                if (
+                    password.type ===
+                    "password"
+                ) {
+
+                    password.type =
+                        "text";
+
+                    eyeButton.innerHTML =
+                        "○";
+
+                }
+
+                else {
+
+                    password.type =
+                        "password";
+
+                    eyeButton.innerHTML =
+                        "◉";
+
+                }
 
             }
+        );
 
-        }
 
 
-        /* ==============================
-           LOGIN
-        ============================== */
+        /* =========================================================
+           LOGIN SUBMIT
+        ========================================================= */
 
         loginForm.addEventListener(
             "submit",
@@ -746,15 +1618,14 @@
 
 
                 /*
-                 * =====================================
-                 * PUT YOUR REAL PASSWORD
-                 * VALIDATION HERE
-                 * =====================================
+                 * =========================================
+                 * YOUR REAL PASSWORD AUTHENTICATION
+                 * SHOULD BE DONE HERE.
                  *
-                 * Once authentication is successful:
+                 * After successful authentication:
                  *
                  * startExperience();
-                 *
+                 * =========================================
                  */
 
 
@@ -764,38 +1635,47 @@
         );
 
 
-        /* ==============================
-           FULLSCREEN + VIDEO
-        ============================== */
+
+        /* =========================================================
+           START EXPERIENCE
+        ========================================================= */
 
         async function startExperience() {
 
+
             /*
-             * Request fullscreen immediately
-             * from user's button interaction.
+             * Request FULLSCREEN.
              *
-             * Browser address bar / toolbar
-             * will disappear if browser allows it.
+             * Because this is triggered directly
+             * by the user's click, browser normally
+             * allows fullscreen.
              */
 
             try {
 
-                const element =
+                const page =
                     document.documentElement;
 
-                if (element.requestFullscreen) {
 
-                    await element.requestFullscreen();
-
-                } else if (
-                    element.webkitRequestFullscreen
+                if (
+                    page.requestFullscreen
                 ) {
 
-                    await element.webkitRequestFullscreen();
+                    await page.requestFullscreen();
 
                 }
 
-            } catch (error) {
+                else if (
+                    page.webkitRequestFullscreen
+                ) {
+
+                    await page.webkitRequestFullscreen();
+
+                }
+
+            }
+
+            catch (error) {
 
                 console.log(
                     "Fullscreen unavailable:",
@@ -805,59 +1685,169 @@
             }
 
 
-            loginScreen.classList.add("hide");
 
-            loader.classList.add("show");
+            /*
+             * Hide login
+             */
+
+            loginScreen.classList.add(
+                "hide"
+            );
+
 
 
             /*
-             * Short transition before video
+             * Show transition screen
              */
 
-            setTimeout(async () => {
-
-                videoScreen.classList.add("show");
-
-                video.currentTime = 0;
+            loader.classList.add(
+                "show"
+            );
 
 
-                try {
 
-                    await video.play();
+            /*
+             * Prepare video
+             */
 
-                } catch (error) {
+            video.currentTime = 0;
 
-                    console.log(
-                        "Video playback failed:",
-                        error
+
+
+            /*
+             * Small cinematic transition
+             */
+
+            setTimeout(
+                async function() {
+
+
+                    videoScreen.classList.add(
+                        "show"
                     );
 
-                }
+
+                    try {
+
+                        /*
+                         * Video plays WITH AUDIO.
+                         *
+                         * No muted attribute is used.
+                         */
+
+                        await video.play();
+
+                    }
+
+                    catch (error) {
+
+                        console.log(
+                            "Video playback failed:",
+                            error
+                        );
+
+                    }
 
 
-                loader.classList.remove("show");
 
-            }, 500);
+                    /*
+                     * Remove loader
+                     */
+
+                    loader.classList.remove(
+                        "show"
+                    );
+
+
+                },
+                600
+            );
 
         }
 
 
-        /* ==============================
-           VIDEO FINISHED
-        ============================== */
+
+        /* =========================================================
+           WHEN VIDEO FINISHES
+        ========================================================= */
 
         video.addEventListener(
             "ended",
             function() {
 
-                /*
-                 * Redirect to ELW main page.
-                 *
-                 * Change this URL according
-                 * to your Laravel route.
-                 */
+                showWelcome();
 
-                window.location.href = "/home";
+            }
+        );
+
+
+
+        /* =========================================================
+           SHOW WELCOME PAGE
+        ========================================================= */
+
+        function showWelcome() {
+
+
+            /*
+             * Activate welcome screen
+             * behind the video.
+             */
+
+            welcomeScreen.classList.add(
+                "show"
+            );
+
+
+
+            /*
+             * Smoothly fade video out.
+             */
+
+            videoScreen.style.transition =
+                "opacity 1.4s ease";
+
+
+            videoScreen.style.opacity =
+                "0";
+
+
+
+            /*
+             * Remove video layer
+             * once fade is complete.
+             */
+
+            setTimeout(
+                function() {
+
+                    video.pause();
+
+                    videoScreen.style.visibility =
+                        "hidden";
+
+                    videoScreen.style.pointerEvents =
+                        "none";
+
+                },
+                1400
+            );
+
+        }
+
+
+
+        /* =========================================================
+           VIDEO ERROR HANDLING
+        ========================================================= */
+
+        video.addEventListener(
+            "error",
+            function() {
+
+                console.error(
+                    "Unable to load elw.mp4"
+                );
 
             }
         );
@@ -865,4 +1855,5 @@
     </script>
 
 </body>
+
 </html>
